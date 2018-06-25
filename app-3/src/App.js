@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+
+import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      names: ["Sam ", "Samer ", "Abdul ", "Hunter ", "Nicole ", "Zain "],
+      filtered: ""
+    };
+  }
+
+  filtered(val) {
+    this.setState({ filtered: val });
+  }
   render() {
+    var listed = this.state.names.filter((e, i, a) => {
+      return e.includes(this.state.filtered);
+    });
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <input
+          placeholder="Type here"
+          onChange={e => this.filtered(e.target.value)}
+        />
+        <h4> {listed} </h4>
       </div>
     );
   }
